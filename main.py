@@ -12,9 +12,6 @@ with open("big_dataset.tsv") as file:
 
 
 def filtering_dataset_by_columns(dataset: list, *columns: str) -> list:
-    """
-      Selecting the columns that we will use during the task
-     """
     necessary_data = []
     for i in range(2, len(dataset)):
         try:
@@ -32,17 +29,12 @@ stars_parameters = filtering_dataset_by_columns(tsv_file_data, "ra_ep2000",
 
 def selecting_stars_in_fov_and_filtering_by_brightness(horizontal_view: float,
                                                        vertical_view: float) -> list:
-    """
-       Selecting the stars that are in our field of view and
-       sorting them by their brightness(from dimmest to brightest).
-    """
     filtered_stars = []
     fov_right_edge = ra + horizontal_view / 2
-    fov_left_edge = ra - horizontal_view / 2
     fov_upper_edge = dec + vertical_view / 2
     fov_bottom_edge = dec - vertical_view / 2
     for i in range(len(stars_parameters)):
-        if fov_left_edge <= stars_parameters[i][1] <= fov_right_edge and \
+        if stars_parameters[i][1] <= fov_right_edge and \
                 fov_bottom_edge <= stars_parameters[i][2] <= fov_upper_edge:
             filtered_stars.append(stars_parameters[i])
 
@@ -61,10 +53,6 @@ stars_in_fov = selecting_stars_in_fov_and_filtering_by_brightness(fov_h, fov_v)
 
 def calculating_and_sorting_distances_of_stars(star_ra: float,
                                                star_dec: float, stars: list) -> list:
-    """
-        Calculating the distances of the brightest stars in fov from the
-        given point and then sorting by their distances
-    """
     for i in range(len(stars)):
         temp_ra = stars[i][1]
         temp_dec = stars[i][2]
