@@ -11,7 +11,7 @@ with open("big_dataset.tsv") as file:
     tsv_file_data = list(tsv_file)
 
 
-def filtering_dataset(dataset: list, *columns: str) -> list:
+def filtering_dataset_by_columns(dataset: list, *columns: str) -> list:
     """
       Selecting the columns that we will use during the task
      """
@@ -26,8 +26,8 @@ def filtering_dataset(dataset: list, *columns: str) -> list:
     return necessary_data
 
 
-stars_parameters = filtering_dataset(tsv_file_data, "ra_ep2000",
-                                     "dec_ep2000", "b")
+stars_parameters = filtering_dataset_by_columns(tsv_file_data, "ra_ep2000",
+                                                "dec_ep2000", "b")
 
 
 def selecting_stars_in_fov_and_filtering_by_brightness(horizontal_view: float,
